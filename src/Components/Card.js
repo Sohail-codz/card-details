@@ -58,7 +58,7 @@ function Card({onUpdateCardInfo}){
         else{
             setErrorTextdate('')
         }
-        if(yearInput === '' || monthInput === ''){
+        if(yearInput === '' && monthInput === ''){
             setErrorTextdate('date required')
             isError = true
         }
@@ -93,7 +93,6 @@ function Card({onUpdateCardInfo}){
 
 
     return(
-    <>
         <div className='details'>
             <form className='cardDetails' 
                 onSubmit={(e)=>{
@@ -176,15 +175,14 @@ function Card({onUpdateCardInfo}){
                             <p style={{marginLeft:'10px',color:'red'}}>{errorTextcvc}</p>
                         </div>
                     </div>
-                <button className='btn' type='submit' onClick={() => {
+                <button className='btn' type='submit' onSubmit={() => {
                     if (!validationNumbers()) {
                         notify();
                     }
                 }}>Confirm</button>
             </form>
+            <ToastContainer/>
         </div>
-        <ToastContainer/>
-    </>
     )
 }
 export default Card;
