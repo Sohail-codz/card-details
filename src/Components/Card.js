@@ -128,6 +128,8 @@ function Card({onUpdateCardInfo}){
                 setYearInput('');
                 setCvcInput('');
 
+                notify();
+
             }}>
                 <label htmlFor='c-name' >CARDHOLDER NAME</label><br></br>
                     <input
@@ -175,11 +177,7 @@ function Card({onUpdateCardInfo}){
                             <p style={{marginLeft:'10px',color:'red'}}>{errorTextcvc}</p>
                         </div>
                     </div>
-                <button className='btn' type='submit' onSubmit={() => {
-                    if (!validationNumbers()) {
-                        notify();
-                    }
-                }}>Confirm</button>
+                <button className='btn' type='submit'>Confirm</button>
             </form>
             <ToastContainer/>
         </div>
