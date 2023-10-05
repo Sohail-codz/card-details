@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import './Card.css'
 
-function Card(){
-
+function Card({onUpdateCardInfo}){
+    
     const [nameInput,setNameInput]=useState('');
     const [cnumbInput,setCnumbInput]=useState('');
     const [monthInput,setMonthInput]=useState('');
@@ -60,7 +60,7 @@ function Card(){
             isError = true
         }
         if (!validateAlphabets(nameInput)) {
-            setErrorTextName('Name can only alphabets');
+            setErrorTextName('Name can only have alphabets');
             setNameInput('');
             isError = true;
         }
@@ -71,28 +71,42 @@ function Card(){
             setErrorTextName('Name required')
             isError = true
         }
+        
+
         return isError
     };
 
 
     return(
         <div className='details'>
-            <form className='cardDetails' onSubmit={(e)=>{
-
+            <form className='cardDetails' 
+                onSubmit={(e)=>{
                 e.preventDefault();
 
                 if(validationNumbers()){
                     return
                 }
 
-                const obj={
-                    name:nameInput,
-                    cardnumber:cnumbInput,
+                let temNumber = ""
+                for(let i = 1; i <= 16; i++){
+                    temNumber += cnumbInput[i - 1]  
+                    if(i % 4 === 0 && i !== 16) 
+                        temNumber += " "
+                }
+
+                const cardInfo={
+                    name:nameInput.toUpperCase(),
+                    cardnumber:temNumber,
                     month:monthInput,
                     year:yearInput,
                     cvc:cvcInput
-                }
-                console.log(obj);
+                };
+
+                onUpdateCardInfo(cardInfo);
+
+
+                console.log(cardInfo);
+
                 setNameInput('');
                 setCnumbInput('');
                 setMonthInput('');
@@ -148,7 +162,11 @@ function Card(){
                     </div>
                 <button type='submit'>Confirm</button>
             </form>
+            
+            
+            
+
         </div>
     )
 }
- export default Card;
+export default Card;
