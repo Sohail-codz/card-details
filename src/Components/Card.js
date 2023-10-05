@@ -49,7 +49,7 @@ function Card({onUpdateCardInfo}){
             setErrorTextcvc('cvc required')
             isError = true
         }
-        if(yearInput.length !== 2 || monthInput.length !== 2 || monthInput>12 || monthInput<1){
+        if(yearInput.length !== 2 || yearInput<1 || monthInput.length !== 2 || monthInput>12 || monthInput<1){
             setErrorTextdate('Wrong date')
             setYearInput('')
             setMonthInput('')
