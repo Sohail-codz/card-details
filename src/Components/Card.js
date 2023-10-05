@@ -1,7 +1,22 @@
 import React, {useState} from 'react';
 import './Card.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Card({onUpdateCardInfo}){
+
+    const notify = ()=>{
+        toast.success('DONE!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+    }
     
     const [nameInput,setNameInput]=useState('');
     const [cnumbInput,setCnumbInput]=useState('');
@@ -78,6 +93,7 @@ function Card({onUpdateCardInfo}){
 
 
     return(
+    <>
         <div className='details'>
             <form className='cardDetails' 
                 onSubmit={(e)=>{
@@ -160,13 +176,15 @@ function Card({onUpdateCardInfo}){
                             <p style={{marginLeft:'10px',color:'red'}}>{errorTextcvc}</p>
                         </div>
                     </div>
-                <button type='submit'>Confirm</button>
+                <button className='btn' type='submit' onClick={() => {
+                    if (!validationNumbers()) {
+                        notify();
+                    }
+                }}>Confirm</button>
             </form>
-            
-            
-            
-
         </div>
+        <ToastContainer/>
+    </>
     )
 }
 export default Card;
