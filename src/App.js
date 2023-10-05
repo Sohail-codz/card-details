@@ -7,7 +7,7 @@ import CardProfileBack from './Components/CardProfileBack';
 function App() {
 
   const [cardInfo, setCardInfo] = useState({
-    name:"SOHAIL",
+    name:"JANE APPLESEED",
     cardnumber:"0000 0000 0000 0000",
     month:'00',
     year:'00',
